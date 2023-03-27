@@ -1,0 +1,28 @@
+  version: "3.8"
+
+  services:
+    app:
+      container_name: nginx
+      build:
+       context: "./"
+       dockerfile: Dockerfile
+      image: nginx:latest
+      ports:
+        - "80:80"
+      volumes:
+      - type: volume
+        source: volume_nginx
+        target: "/data/public"
+        read_only: false
+      networks:
+        - network_example
+
+
+  volumes:
+    volume_nginx:
+      name: volume_nginx
+
+  networks:
+    network_example:
+      name: network_example
+      driver: bridge

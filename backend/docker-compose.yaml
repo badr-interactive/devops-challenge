@@ -1,0 +1,28 @@
+  version: "3.8"
+
+  services:
+    app:
+      container_name: app_be
+      build:
+       context: "./"
+       dockerfile: Dockerfile
+      image: app_be:latest
+      ports:
+      - "3001:3000"
+      volumes:
+      - type: volume
+        source: volume_app 
+        target: "/data/public"
+        read_only: false
+      networks:
+        - network_example
+
+
+  volumes:
+    volume_app:
+      name: volume_app
+
+  networks:
+    network_example:
+      name: network_example
+      driver: bridge
